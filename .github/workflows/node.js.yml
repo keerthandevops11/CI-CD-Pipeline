@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '23'   # adjust version as per your Jenkins setup
+          node-version: '23'   # adjust version
 
       - name: Frontend Compilation (Syntax Check)
         run: |
@@ -50,15 +50,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner  
         uses: aquasecurity/trivy-action@0.28.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
           ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          vuln-type: 'os,library'   #os packages, dependencies
+          severity: 'CRITICAL,HIGH'  #ignore low medium
 
   sonar-frontend:
     runs-on: Agent-1
@@ -70,7 +70,7 @@ jobs:
       - name: SonarQube Scan (client)
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: client        # 👈 instead of working-directory
+          projectBaseDir: client        #working-directory
           args: >
             -Dsonar.projectKey=myorg_client
             -Dsonar.projectName=myorg_client
@@ -90,7 +90,7 @@ jobs:
       - name: SonarQube Scan (api)
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: api           # 👈 instead of working-directory
+          projectBaseDir: api           #working-directory
           args: >
             -Dsonar.projectKey=myorg_api
             -Dsonar.projectName=myorg_api
