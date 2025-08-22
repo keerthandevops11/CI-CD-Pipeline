@@ -198,6 +198,6 @@ jobs:
             sudo docker stop frontend || true
             sudo docker rm frontend || true
             sudo docker run -d --name backend -p 5000:5000 keerthan329/backend:latest
-            sudo docker run -d --name frontend -p 3000:3000 keerthan329/frontend:latest
+            sudo docker run -d --name frontend -p 80:80 keerthan329/frontend:latest
 
   
