@@ -70,7 +70,7 @@ jobs:
       - name: SonarQube Scan (client)
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: client        #working-directory
+          projectBaseDir: client        #workingdirectory fro frontend
           args: >
             -Dsonar.projectKey=myorg_client
             -Dsonar.projectName=myorg_client
@@ -90,7 +90,7 @@ jobs:
       - name: SonarQube Scan (api)
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: api           #working-directory
+          projectBaseDir: api           #workingdirectory for backend
           args: >
             -Dsonar.projectKey=myorg_api
             -Dsonar.projectName=myorg_api
