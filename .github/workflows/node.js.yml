@@ -8,7 +8,7 @@ on:
 
 jobs:
   compile:
-    runs-on: Agent-1
+    runs-on: Agent11
 
     steps:
       - name: Checkout code
@@ -30,7 +30,7 @@ jobs:
           find . -name "*.js" -exec node --check {} +
 
   gitleaks-scan:
-    runs-on: Agent-1
+    runs-on: Agent11
     needs: compile
     steps:
       - name: Checkout code
@@ -45,7 +45,7 @@ jobs:
           gitleaks detect --source ./api --exit-code 1
 
   trivy_fs_scan:
-    runs-on: Agent-1
+    runs-on: Agent11
     needs: gitleaks-scan
     steps:
       - name: Checkout code
@@ -61,7 +61,7 @@ jobs:
           severity: 'CRITICAL,HIGH'  #ignore low medium
 
   sonar-frontend:
-    runs-on: Agent-1
+    runs-on: Agent11
     needs: trivy_fs_scan
     steps:
       - name: Checkout code
@@ -81,7 +81,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   sonar-backend:
-    runs-on: Agent-1
+    runs-on: Agent11
     needs: sonar-frontend
     steps:
       - name: Checkout code
